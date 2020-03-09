@@ -23,6 +23,8 @@ export class StoryController {
 			type: req.body.type,
 			complexity: req.body.complexity,
 			userId: req.decoded.id,
+			dateRejected: null,
+			dateAccepted: null,
 			status: null // make it pending
 		})
 		.then(story => {
@@ -35,7 +37,7 @@ export class StoryController {
 		const {Story} = this.models;
 		let options;
 
-		// is Admin
+		// Retrieve based on role, admin or user
 		options = req.decoded.id === 1 ? {status: null} : {userId: req.decoded.id}
 		return Story.findAll({
 			where: options
@@ -46,11 +48,17 @@ export class StoryController {
 		.catch(next)	
 	}
 	updateStatus = (req, res,next, status) => {
+		// Check if it is admin
+		if(req.decoded.id !== 1) {
+			return res.status(403).json({message: 'Unauthorized Access'})
+		}
 		const {Story} = this.models;
+		const date = status ? {dateAccepted: new Date()} : {dateRejected: new Date()};
 		Story
 			.update(
 				{
-					status
+					status,
+					...date
 				},
 				{
 					where: {
@@ -65,17 +73,11 @@ export class StoryController {
 		})
 	}
 	approve = (req, res,next) => {
-		if(req.decoded.id !== 1) {
-			return res.status(403).json({message: 'Unauthorized Access'})
-		}
+		
 		this.updateStatus(req, res,next, 1)
 	}
 
 	reject = (req,res,next) => {
-		// move to single file
-		if(req.decoded.id !== 1) {
-			return res.status(403).json({message: 'Unauthorized Access'})
-		}
 		// set status to rejected
 		this.updateStatus(req, res,next, 0)
 	}

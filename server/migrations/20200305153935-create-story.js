@@ -27,7 +27,7 @@ module.exports = {
         type: Sequelize.DECIMAL(10,2)
       },
       dateAccepted: {
-        type: Sequelize.DATE
+		type: Sequelize.DATE
       },
       dateRejected: {
         type: Sequelize.DATE
