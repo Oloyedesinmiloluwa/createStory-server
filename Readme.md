@@ -23,7 +23,8 @@ JSON web token is used for authentication, token generated during login is expec
 
 ## Endpoints
 
-- [POST] User Login `/login` Based on current specification, Login currently functions as sign up except for the admin whose email and password must match the seeded values.
+- [POST] User Login `/login`
+- [POST] User Signup `/signup`
 - [POST] Admin Login `/admin-login`. To login as admin, you must provide the email and password of the Admin seeded into the database.
 - [GET] Get Stories `/getStories`. This is a protected route, authentication token must be provided
 - [POST] Create Stories `/createStories`. This is a protected route.
