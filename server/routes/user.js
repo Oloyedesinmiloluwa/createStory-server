@@ -1,7 +1,7 @@
 import express from 'express';
 import expressValidator from 'express-validator';
 import userController from '../controllers/userController';
-import { validateUserDetails } from '../validations/userValidation';
+import { validateUserDetails, validateSignupDetails } from '../validations/userValidation';
 
 const userRoute = express();
 userRoute.use(expressValidator());
@@ -11,4 +11,7 @@ userRoute
 userRoute
 	.route('/admin-login')
 	.post(userController.loginAdmin)
+userRoute
+	.route('/signup')
+	.post(validateSignupDetails, userController.signupUser);
 export default userRoute;
