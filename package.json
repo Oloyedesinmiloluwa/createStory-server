@@ -2,6 +2,9 @@
   "name": "create-story-server",
   "version": "1.0.0",
   "description": "Application for users to create stories",
+  "engines": {
+    "node": "12.x"
+  },
   "scripts": {
     "test": "NODE_ENV=test npm run seed&& NODE_ENV=test mocha server/tests/**/*.test.js --require @babel/register --exit",
     "start": "node server/dist/main.js",
@@ -9,7 +12,8 @@
     "babel-node": "babel-node",
     "start:dev": "nodemon --exec npm run babel-node -- server/main.js",
     "setup": "sequelize db:migrate:undo:all&& sequelize db:migrate&& sequelize db:seed:all",
-    "build": "babel server/ -d ./server/dist"
+    "build": "babel server/ -d ./server/dist",
+    "heroku-postbuild": "npm run build"
   },
   "keywords": [
     "story"

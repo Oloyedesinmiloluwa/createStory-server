@@ -19,9 +19,12 @@ module.exports = {
   },
   "production": {
     "username": "root",
-    "password": null,
-    "database": "database_production",
+    "password": process.env.PROD_DB_PASSWORD,
+    "database": process.env.PROD_DB_NAME,
     "host": "127.0.0.1",
     "dialect": "mysql"
-  }
+  },
+  // "production": {
+  //   "use_env_variable": 'DATABASE_URL'
+  // }
 }
