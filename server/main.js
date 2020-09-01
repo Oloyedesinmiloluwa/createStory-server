@@ -23,5 +23,5 @@ app.all('*', (req,res)=>res.status(404).send({
 	message: 'You are in the wrong location'
 }))
 app.set('port', port);
-app.listen(port, () => console.info(`App running on port: ${port}`) );
+const server = app.listen(port, () => console.info(`App running on port: ${port}`) );
 export default app;

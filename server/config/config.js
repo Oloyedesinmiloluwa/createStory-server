@@ -18,13 +18,6 @@ module.exports = {
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": process.env.PROD_DB_PASSWORD,
-    "database": process.env.PROD_DB_NAME,
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
-  // "production": {
-  //   "use_env_variable": 'DATABASE_URL'
-  // }
+    "use_env_variable": 'DATABASE_URL'
+  }
 }
